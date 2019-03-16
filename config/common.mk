@@ -159,6 +159,14 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
+# Cutout control overlay
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay
+
+# Branding
+include vendor/aosp/config/branding.mk
+>>>>>>> 8b1faf0c... vendor: Add hide notch support [2/3]
+
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/rebellion/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/rebellion/overlay/common
 
