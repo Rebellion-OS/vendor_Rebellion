@@ -5,14 +5,13 @@
 
 export C=/tmp/backupdir
 export S=$2
-export V=9
 
 export ADDOND_VERSION=1
 
-# Scripts in addon.d expect to find backuptool.functions in /tmp
+# Scripts in /system/addon.d expect to find backuptool.functions in /tmp
 cp -f /tmp/install/bin/backuptool.functions /tmp
 
-# Preserve addon.d in /tmp/addon.d
+# Preserve /system/addon.d in /tmp/addon.d
 preserve_addon_d() {
   if [ -d $S/addon.d/ ]; then
     mkdir -p /tmp/addon.d/
@@ -33,19 +32,6 @@ preserve_addon_d() {
   fi
 }
 
-# Proceed only if /system is the expected GZOSP version
-check_prereq() {
-# If there is no build.prop file the partition is probably empty.
-if [ ! -r $S/build.prop ]; then
-    return 0
-fi
-if ( ! grep -q "^ro.build.version.release=$V.*" $S/build.prop ); then
-  echo "Not backing up files from incompatible version: $V"
-  return 0
-fi
-return 1
-}
-
 # Restore /system/addon.d from /tmp/addon.d
 restore_addon_d() {
   if [ -d /tmp/addon.d/ ]; then
@@ -53,6 +39,15 @@ restore_addon_d() {
     cp -a /tmp/addon.d/* $S/addon.d/
     rm -rf /tmp/addon.d/
   fi
+}
+
+# Proceed only if /system is the expected major and minor version
+check_prereq() {
+# If there is no build.prop file the partition is probably empty.
+if [ ! -r $S/build.prop ]; then
+    return 0
+fi
+return 1
 }
 
 check_blacklist() {

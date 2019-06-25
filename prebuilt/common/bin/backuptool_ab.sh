@@ -5,7 +5,6 @@
 
 export S=/system
 export C=/postinstall/tmp/backupdir
-export V=9
 
 export ADDOND_VERSION=2
 
@@ -49,11 +48,7 @@ check_prereq() {
 if [ ! -r /system/build.prop ]; then
     return 0
 fi
-
-grep -q "^ro.gzosp.version=$V.*" /system/etc/prop.default /system/build.prop && return 1
-
-echo "Not backing up files from incompatible version: $V"
-return 0
+return 1
 }
 
 check_blacklist() {

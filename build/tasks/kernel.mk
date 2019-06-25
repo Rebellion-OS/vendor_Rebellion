@@ -1,5 +1,7 @@
 # Copyright (C) 2012 The CyanogenMod Project
 #           (C) 2017 The LineageOS Project
+#           (C) 2018 The PixelExperience Project
+#           (C) 2019 The Rebellion Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -188,20 +190,6 @@ ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
     ifeq ($(KERNEL_CC),)
         KERNEL_CC := CC="$(CCACHE_BIN) clang"
     endif
-else
-    KERNEL_CROSS_COMPILE := CROSS_COMPILE="$(ccache) $(KERNEL_TOOLCHAIN_PATH)"
-endif
-
-# IDK why new kernels want this...
-ifeq ($(KERNEL_ARCH),arm64)
-   KERNEL_CROSS_COMPILE += CROSS_COMPILE_ARM32="$(ccache) $(BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-"
-endif
-
-ccache =
-
-ifeq ($(HOST_OS),darwin)
-  MAKE_FLAGS += C_INCLUDE_PATH=$(BUILD_TOP)/external/elfutils/libelf:/usr/local/opt/openssl/include
-  MAKE_FLAGS += LIBRARY_PATH=/usr/local/opt/openssl/lib
 endif
 
 ifeq ($(TARGET_KERNEL_MODULES),)
@@ -309,16 +297,13 @@ alldefconfig:
 	env KCONFIG_NOTIMESTAMP=true \
 		 $(call make-kernel-target,alldefconfig)
 
-TARGET_PREBUILT_DTBO = $(PRODUCT_OUT)/dtbo/arch/$(KERNEL_ARCH)/boot/dtbo.img
-$(TARGET_PREBUILT_DTBO): $(AVBTOOL)
+ifeq ($(TARGET_NEEDS_DTBOIMAGE),true)
+BOARD_PREBUILT_DTBOIMAGE = $(PRODUCT_OUT)/dtbo/arch/$(KERNEL_ARCH)/boot/dtbo.img
+$(BOARD_PREBUILT_DTBOIMAGE):
 	echo -e ${CL_GRN}"Building DTBO.img"${CL_RST}
 	$(call make-dtbo-target,$(KERNEL_DEFCONFIG))
 	$(call make-dtbo-target,dtbo.img)
-	$(AVBTOOL) add_hash_footer \
-		--image $@ \
-		--partition_size $(BOARD_DTBOIMG_PARTITION_SIZE) \
-		--partition_name dtbo $(INTERNAL_AVB_DTBO_SIGNING_ARGS) \
-		$(BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS)
+endif # TARGET_NEEDS_DTBOIMAGE
 
 endif # FULL_KERNEL_BUILD
 
@@ -333,19 +318,13 @@ $(file) : $(KERNEL_BIN) | $(ACP)
 ALL_PREBUILT += $(INSTALLED_KERNEL_TARGET)
 endif
 
-ifeq ($(TARGET_NEEDS_DTBOIMAGE),true)
-file := $(INSTALLED_DTBOIMAGE_TARGET)
-ALL_PREBUILT += $(file)
-$(file) : $(TARGET_PREBUILT_DTBO) | $(ACP)
-	$(transform-prebuilt-to-target)
-
+INSTALLED_DTBOIMAGE_TARGET := $(PRODUCT_OUT)/dtbo.img
 ALL_PREBUILT += $(INSTALLED_DTBOIMAGE_TARGET)
-endif
 
 .PHONY: kernel
 kernel: $(INSTALLED_KERNEL_TARGET)
 
-.PHONY: dtbo
-dtbo: $(INSTALLED_DTBOIMAGE_TARGET)
+.PHONY: dtboimage
+dtboimage: $(INSTALLED_DTBOIMAGE_TARGET)
 
 endif # TARGET_NO_KERNEL
