@@ -2,13 +2,13 @@
 
 PRODUCT_PACKAGES += \
     Calendar \
-	Contacts \
-	DeskClock
-	Dialer \
-	ExactCalculator \
-	Gallery2 \
-	Launcher3QuickStep \
-	Messaging \
+    Contacts \
+    DeskClock
+    Dialer \
+    ExactCalculator \
+    Gallery2 \
+    Launcher3QuickStep \
+    Messaging \
     OmniStyle \
-	Phonograph \
-	Recorder
+    Phonograph \
+    Recorder
