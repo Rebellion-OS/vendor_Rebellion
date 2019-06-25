@@ -3,7 +3,7 @@
 PRODUCT_PACKAGES += \
     Calendar \
     Contacts \
-    DeskClock
+    DeskClock \
     Dialer \
     ExactCalculator \
     Gallery2 \
