@@ -10,7 +10,7 @@ PRODUCT_PACKAGES += \
     LatinIME \
     Lawnchair \
     LawnConf \
-    Messaging \
+    messaging \
     OmniStyle \
     Phonograph \
     Recorder
