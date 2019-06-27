@@ -30,7 +30,7 @@ include $(BUILD_PREBUILT)
 
 #Launchair
 include $(CLEAR_VARS)
-LOCAL_MODULE := Lawnchair
+LOCAL_MODULE := LoncerAPK
 LOCAL_SRC_FILES := common/priv-app/Lawnchair.apk
 LOCAL_MODULE_CLASS := APPS
 LOCAL_PRIVILEGED_MODULE := true
