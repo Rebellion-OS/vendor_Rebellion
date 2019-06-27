@@ -170,7 +170,7 @@ PRODUCT_PACKAGES += \
 
 include vendor/rebellion/config/version.mk
 include vendor/rebellion/config/ota.mk
-include vendor/rebellion/packages.mk
+include vendor/rebellion/config/packages.mk
 include vendor/pixelstyle/config.mk
 include vendor/themes/config.mk
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
