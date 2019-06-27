@@ -8,7 +8,7 @@ PRODUCT_PACKAGES += \
     ExactCalculator \
     Gallery2 \
     LatinIME \
-    Lawnchair \
+    LoncerAPK \
     LawnConf \
     messaging \
     OmniStyle \
