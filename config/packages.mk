@@ -13,7 +13,8 @@ PRODUCT_PACKAGES += \
     messaging \
     OmniStyle \
     Phonograph \
-    Recorder
+    Recorder \
+    SubstratumSignature
 
 # Lawnchair Permissions
 PRODUCT_COPY_FILES += \
