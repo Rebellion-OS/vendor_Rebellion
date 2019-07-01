@@ -8,14 +8,14 @@ REBELLION_OTA_VERSION_CODE := pie
 endif
 
 REBELLION_PROPERTIES += \
-    org.pixelexperience.ota.version_code=$(REBELLION_OTA_VERSION_CODE) \
+    ro.rebellion.ota.version_code=$(REBELLION_OTA_VERSION_CODE) \
     sys.ota.disable_uncrypt=1
 
 PRODUCT_PACKAGES += \
-    Updates
+    RebellionOTA
 
 PRODUCT_COPY_FILES += \
-    vendor/rebellion/config/permissions/org.pixelexperience.ota.xml:system/etc/permissions/org.pixelexperience.ota.xml
+    vendor/rebellion/config/permissions/com.rebellion.ota.xml:system/etc/permissions/com.rebellion.ota.xml
 
 endif
 endif
