@@ -23,7 +23,8 @@ MODVERSION := RebellionOS_P-v$(REBELLION_VERSION_CODE)-$(REBELLION_BUILD)-$(REBE
 
 # System Properties
 CUSTOM_PROPERTIES := \
-    ro.modversion==$(MODVERSION) \
+    ro.modversion=$(MODVERSION) \
+    ro.rebellion.showversion=$(MODVERSION) \
     ro.rebellion.version=$(REBELLION_VERSION_PROP) \
     ro.rebellion.build_date=$(REBELLION_BUILD_DATE) \
     ro.rebellion.build_date_utc=$(REBELLION_BUILD_DATE_UTC) \
