@@ -12,10 +12,10 @@ REBELLION_PROPERTIES += \
     sys.ota.disable_uncrypt=1
 
 PRODUCT_PACKAGES += \
-    RebellionOTA
+    Updates
 
 PRODUCT_COPY_FILES += \
-    vendor/rebellion/config/permissions/com.rebellion.ota.xml:system/etc/permissions/com.rebellion.ota.xml
+    vendor/rebellion/config/permissions/org.rebellion.ota.xml:system/etc/permissions/org.rebellion.ota.xml
 
 endif
 endif
