@@ -6,8 +6,5 @@
     <dimen name="status_bar_height_portrait">28dp</dimen>
     <dimen name="status_bar_height_landscape">28dp</dimen>
     <dimen name="rounded_corner_radius_top">60px</dimen>
-<<<<<<< HEAD
     <bool name="config_showMultiuserIconKeyguard">true</bool>
-=======
->>>>>>> 8b1faf0c... vendor: Add hide notch support [2/3]
 </resources>
